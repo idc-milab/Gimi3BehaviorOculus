@@ -8,28 +8,25 @@ public class ProxtemicsCSV : MonoBehaviour
     //#todo change for final build
     private StreamWriter writer;
 
-    private CapsuleCollider capsuleCollider;
-    private Rigidbody position;
     public Rigidbody gimiCentre;
     private float time = 0.0f;
     public float interpolationPeriod = 1f;
     public Renderer Gimi_renderer;
-
-
+    private bool b_GimiIsVisable = false;
+    private UnityEngine.Camera FOV;
 
     void Awake()
     {
-        capsuleCollider = GetComponent<CapsuleCollider>();
-        if (!Directory.Exists(Application.dataPath + "/../CSV/" + "Proxtemics.csv"))
+        if (!Directory.Exists(getPathToCSV()))
         {
-            Directory.CreateDirectory(Application.dataPath + "/../CSV/");
+            Directory.CreateDirectory(getPathToFile());
         }
-        writer = new StreamWriter(Application.dataPath + "/../CSV/" + "Proxtemics.csv");
+        writer = new StreamWriter(getPathToCSV());
         //This is writing the line of the type, name, damage... etc... (I set these)
         writer.WriteLine("Time , distance to gimi, isGimiVisable");
+        FOV = UnityEngine.Camera.main;
 
     }
-
 
     //-------------------------------------------------
     void FixedUpdate()
@@ -39,19 +36,28 @@ public class ProxtemicsCSV : MonoBehaviour
         //transform.localPosition = head.localPosition - 0.5f * distanceFromFloor * Vector3.up;
 
         time += Time.deltaTime;
+
         if (time >= interpolationPeriod)
         {
             time = 0.0f;
-            writer.WriteLine(DateTime.Now.ToString() + " , " + Vector3.Distance(gimiCentre.position, this.transform.position).ToString() + "," + Gimi_renderer.isVisible);
+            writer.WriteLine(DateTime.Now.ToString() + " , " + Vector3.Distance(gimiCentre.position, transform.position).ToString() + "," + IsVisable());
             writer.Flush();
-            //print(DateTime.Now.ToString() + " , " + Vector3.Distance(gimiCentre.position, this.transform.position).ToString() + "," + Gimi_renderer.isVisible
         }
-
-
     }
 
+    private string IsVisable()
+    {
+        Vector3 viewPos = FOV.WorldToViewportPoint(gimiCentre.position);
+        if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
+        {
+            // Your object is in the range of the camera, you can apply your behaviour
+            return  true.ToString();
+        }
+        else
+            return false.ToString();
 
-    private string getPath()
+    }
+    private string getPathToCSV()
     {
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + "Proxtemics.csv";
@@ -60,8 +66,19 @@ public class ProxtemicsCSV : MonoBehaviour
 #elif UNITY_IPHONE
                 return Application.persistentDataPath+"/"+"Saved_Inventory.csv";
 #else
-                return Application.dataPath +"/CSV/" + "Proxtemics.csv";
+        return Application.dataPath +"/CSV/" + "Proxtemics.csv";
 #endif
     }
+    private string getPathToFile()
+    {
+#if UNITY_EDITOR
+        return Application.dataPath + "/CSV/";
+#elif UNITY_ANDROID
+        return Application.persistentDataPath+"/CSV/";
+#else
+        return Application.dataPath +"/CSV/";
+#endif
+    }
+
 
 }
