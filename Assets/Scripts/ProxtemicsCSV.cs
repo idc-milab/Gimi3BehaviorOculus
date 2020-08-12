@@ -4,16 +4,13 @@ using System;
 
 public class ProxtemicsCSV : MonoBehaviour
 {
-    public Transform head;
-    //#todo change for final build
-    private StreamWriter writer;
-
-    public Rigidbody gimiCentre;
     private float time = 0.0f;
-    public float interpolationPeriod = 1f;
-    public Renderer Gimi_renderer;
-    private bool b_GimiIsVisable = false;
     private UnityEngine.Camera FOV;
+    private StreamWriter writer;
+    public Rigidbody gimiCentre;
+    public float interpolationPeriod = 1f;
+    public Transform head;
+
 
     void Awake()
     {
@@ -22,7 +19,6 @@ public class ProxtemicsCSV : MonoBehaviour
             Directory.CreateDirectory(getPathToFile());
         }
         writer = new StreamWriter(getPathToCSV());
-        //This is writing the line of the type, name, damage... etc... (I set these)
         writer.WriteLine("Time , distance to gimi, isGimiVisable");
         FOV = UnityEngine.Camera.main;
 
@@ -30,18 +26,17 @@ public class ProxtemicsCSV : MonoBehaviour
 
     //-------------------------------------------------
     void FixedUpdate()
-    {
-        //float distanceFromFloor = Vector3.Dot(head.localPosition, Vector3.up);
-        //capsuleCollider.height = Mathf.Max(capsuleCollider.radius, distanceFromFloor);
-        //transform.localPosition = head.localPosition - 0.5f * distanceFromFloor * Vector3.up;
+    { 
 
         time += Time.deltaTime;
 
         if (time >= interpolationPeriod)
         {
             time = 0.0f;
-            writer.WriteLine(DateTime.Now.ToString() + " , " + Vector3.Distance(gimiCentre.position, transform.position).ToString() + "," + IsVisable());
+            writer.WriteLine(DateTime.Now.ToString() + " , " + Vector3.Distance(gimiCentre.position, head.position).ToString() + "," + IsVisable());
             writer.Flush();
+            //Debug.Log("HMD position: " + head.position);
+            //Debug.Log("Distance from Gimi: " + Vector3.Distance(gimiCentre.position, head.position));
         }
     }
 
@@ -60,9 +55,9 @@ public class ProxtemicsCSV : MonoBehaviour
     private string getPathToCSV()
     {
 #if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Proxtemics.csv";
+        return Application.dataPath + "/CSV/" + "ProxtemicsWith.csv";
 #elif UNITY_ANDROID
-        return Application.persistentDataPath+"/CSV/" + "Proxtemics.csv";
+        return Application.persistentDataPath+"/CSV/" + "ProxtemicsWith.csv";
 #elif UNITY_IPHONE
                 return Application.persistentDataPath+"/"+"Saved_Inventory.csv";
 #else
