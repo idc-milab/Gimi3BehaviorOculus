@@ -2,7 +2,9 @@
 using System.IO;
 using System;
 
-public class ProxtemicsCSV : MonoBehaviour
+
+
+public class proxtemics2 : MonoBehaviour
 {
     private float time = 0.0f;
     private UnityEngine.Camera FOV;
@@ -33,6 +35,7 @@ public class ProxtemicsCSV : MonoBehaviour
                 ((distance > 3) ? 1 : 0),
                 (IsVisable() ? 1 : 0));
             time = 0.0f;
+            Debug.Log(GD.table.Count);
         }
     }
 
@@ -91,4 +94,7 @@ public class ProxtemicsCSV : MonoBehaviour
         return Application.dataPath +"/CSV/";
 #endif
     }
+
+
 }
+
