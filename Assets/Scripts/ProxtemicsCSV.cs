@@ -30,13 +30,33 @@ public class ProxtemicsCSV : MonoBehaviour
             GD.addToTable(distance,
                 ((distance < 1) ? 1 : 0),
                 ((distance >= 1 && distance <= 2) ? 1 : 0),
-                ((distance > 3) ? 1 : 0),
+                ((distance > 2) ? 1 : 0),
                 (IsVisable() ? 1 : 0));
             time = 0.0f;
         }
     }
-
-
+    //kill android app
+    private void OnApplicationPause(bool isPaused)
+    {
+        if (isPaused)
+        {
+            if (!Directory.Exists(getPathToCSV()))
+            {
+                Directory.CreateDirectory(getPathToFile());
+            }
+            writer = new StreamWriter(getPathToCSV());
+            writer.WriteLine("Time , distance to gimi, less than 1 , between 1 and 2 , between 2 and 3 , isGimiVisable");
+            foreach (SingleGimiData element in GD.table)
+            {
+                writer.WriteLine(element.PrintCSV());
+                writer.Flush();
+            }
+            writer.WriteLine(GD.getAverages());
+            writer.Flush();
+            writer.Close();
+        }
+    }
+    //kill unityapp
     void OnApplicationQuit()
     {
         if (!Directory.Exists(getPathToCSV()))
