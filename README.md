@@ -11,6 +11,11 @@
 
 
 ### Running the app
+- to create all 4 scenes:
+  - activate relvant gimi in scene
+  - project setting 
+    - other setting change the package name com.milab.Gimi<A/S/I/Without>
+    - change product name and version number
 - for wireless build 
   - create an apk via unity.
   - use sidequest (third party app used on the PC)
