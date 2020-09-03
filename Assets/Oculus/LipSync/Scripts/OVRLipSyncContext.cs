@@ -211,7 +211,7 @@ public class OVRLipSyncContext : OVRLipSyncContextBase
     /// <param name="channels">Channels.</param>
     public void PostprocessAudioSamples(float[] data, int channels)
     {
-        // Turn off output (so that we don't get feedback from mics too close to speakers)
+        // Turn off output (so that we don't get feedback from mics too IntimateDistance to speakers)
         if (!audioLoopback)
         {
             for (int i = 0; i < data.Length; ++i)

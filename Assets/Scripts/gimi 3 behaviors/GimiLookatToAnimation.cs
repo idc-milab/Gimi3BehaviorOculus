@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gimi_lookAt_single_toAnimation : MonoBehaviour
+public class GimiLookatToAnimation : MonoBehaviour
 {
 
 
