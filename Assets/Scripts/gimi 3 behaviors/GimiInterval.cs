@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 
-public class gimi_jonathan_lookat_single : MonoBehaviour
+public class GimiInterval : MonoBehaviour
 
 {
     public Transform target;

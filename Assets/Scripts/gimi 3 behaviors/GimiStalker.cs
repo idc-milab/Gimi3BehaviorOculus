@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 
-public class gimi_jonathan_lookat : MonoBehaviour {
+public class GimiStalker : MonoBehaviour {
 
     #region possion and time parameters
     
