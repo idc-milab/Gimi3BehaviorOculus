@@ -51,7 +51,7 @@ public class GimiBehviourManager : MonoBehaviour
     {
         time += Time.deltaTime;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(newDirection - transform.position), Time.deltaTime * speed);
-        if (time <= (startsleeptime+2f))
+        if (time <= (startsleeptime+3f))
         {
             //transform.LookAt(startPoint);
         }
@@ -67,9 +67,10 @@ public class GimiBehviourManager : MonoBehaviour
         if (wantedState == null)
         {
             Debug.Log("animation activate");
-            SmoothLookAt(AnimationStart.position, transitionSpeedToStart,Time.deltaTime);
+            
             this.GetComponent<GimiStalker>().enabled = false;
             this.GetComponent<GimiInterval>().enabled = false;
+            SmoothLookAt(AnimationStart.position, transitionSpeedToStart, Time.deltaTime);
             this.GetComponent<Animator>().enabled = true;
             this.GetComponent<GimiLookatToAnimation>().enabled = true;
             currentRunningBehavior = null;
@@ -78,24 +79,23 @@ public class GimiBehviourManager : MonoBehaviour
         if (wantedState == false)
         {
             Debug.Log("interval activate");
-            SmoothLookAt(IntervalStart.position, transitionSpeedToStart, Time.deltaTime);
             this.GetComponent<GimiStalker>().enabled = false;
-            this.GetComponent<GimiInterval>().enabled = true;
             this.GetComponent<Animator>().Play ("AmitGimi animation", -1 ,normalizedTime: -0.1f);
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<GimiLookatToAnimation>().enabled = false;
+            SmoothLookAt(IntervalStart.position, transitionSpeedToStart, Time.deltaTime);
+            this.GetComponent<GimiInterval>().enabled = true;
             currentRunningBehavior = false;
             return;
         }
         if (wantedState == true)
         {
             Debug.Log("stalking activate");
-            
-            SmoothLookAt(HDM.transform.position, transitionSpeedToStart, Time.deltaTime);
-            this.GetComponent<GimiStalker>().enabled = true;
             this.GetComponent<GimiInterval>().enabled = false;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<GimiLookatToAnimation>().enabled = false;
+            SmoothLookAt(HDM.transform.position, transitionSpeedToStart, Time.deltaTime);
+            this.GetComponent<GimiStalker>().enabled = true;
             currentRunningBehavior = true;
             return;
         }
