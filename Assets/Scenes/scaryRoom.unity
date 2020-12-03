@@ -3497,7 +3497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42e4ceca36fb114aa936321be40ae3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1904953778}
   timedelay: 1
   B_shouldJiggle: 0
   power: 0.044
@@ -6615,8 +6615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1db416500417640ade025cb8985b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  startPoint: {fileID: 0}
+  target: {fileID: 1904953778}
+  startPoint: {fileID: 2001262088}
   endpoint: {fileID: 349448194}
   sleepTime: 3
   trackTime: 3
@@ -9318,8 +9318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a407364beeb26f94fbd032b25f6a6602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  startPoint: {fileID: 0}
+  target: {fileID: 1904953778}
+  startPoint: {fileID: 2001262088}
   sleepTime: 4
   trackTime: 4
   transitionSpeedToTarget: 2
