@@ -10,8 +10,14 @@ public class SceneChanger : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        
     }
+    public void ChangeScene(string sceneName,GameObject Behavior)
+    {
+        SceneManager.LoadScene(sceneName);
+        
 
+    }
     // Update is called once per frame
     public void Exit()
     {
