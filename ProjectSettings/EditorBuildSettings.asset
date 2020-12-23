@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/3behaviors/empty.unity
     guid: 5899d0059507ea945937edd53aaf0543
   - enabled: 0
-    path: Assets/Scenes/scaryRoom.unity
-    guid: 4ef31a8ed9b646f47bfc8ecb32cacf1d
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Scenes/3behaviors/Stalker.unity
     guid: 6308e58dfa00d8f4997f991f472ab008
@@ -23,9 +23,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/3behaviors/Animation.unity
     guid: 3f62cf53acf379644a87860d2f999afa
-  - enabled: 1
-    path: Assets/Scenes/3behaviors/Scary.unity
+  - enabled: 0
+    path: Assets/Scenes/3behaviors/ScaryStalker.unity
     guid: 62410c60afbfe4f3380f17eaaf51fdb5
+  - enabled: 1
+    path: Assets/Scenes/3behaviors/ScaryAnimation.unity
+    guid: 0df9187c69e3f4f0db19b931ca00c78a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0836a1a0bcf0cfb47b003c8cd4bb7785,
       type: 2}
