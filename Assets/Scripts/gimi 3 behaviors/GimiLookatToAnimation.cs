@@ -24,30 +24,25 @@ public class GimiLookatToAnimation : MonoBehaviour
         track = false;
     }
 
-    private void Start()
-    {
-        track = false;
-        transform.LookAt(startPoint);
-        animator = gameObject.GetComponent<Animator>();
-        anim = gameObject.GetComponent<Animation>();
-        
-    }
+
+    private void OnEnable() { }
+
 
     void Update()
     {
-        
-        if (!anim.isPlaying && track)
+        /*
+        time += Time.deltaTime;
+
+        if (time >= sleepTime && time < sleepTime + trackTime)
         {
-            animator.Play("AmitGimi animation");
-            return;
+            SmoothLookAt(target.position, transitionSpeedToStart);
+
         }
         if (track && anim.isPlaying)
         {
             return;
         }
-       
-        time += Time.deltaTime;
-
+        /*
         if (time >= sleepTime && time < sleepTime+trackTime)
         {
             SmoothLookAt(target.position,transionSpeedToTarget);
@@ -63,8 +58,13 @@ public class GimiLookatToAnimation : MonoBehaviour
             track = true;
             animator.enabled = true;
         }
-       
-        
+        if (!anim.isPlaying && track)
+        {
+            animator.Play("AmitGimi animation");
+            return;
+        }*/
+
+
 
     }
     void SmoothLookAt(Vector3 newDirection, float speed)

@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/3behaviors/empty.unity
     guid: 5899d0059507ea945937edd53aaf0543
   - enabled: 0
-    path: Assets/Scenes/scaryRoom.unity
-    guid: 4ef31a8ed9b646f47bfc8ecb32cacf1d
-  - enabled: 0
     path: Assets/Scenes/3behaviors/Stalker.unity
     guid: 6308e58dfa00d8f4997f991f472ab008
   - enabled: 0
