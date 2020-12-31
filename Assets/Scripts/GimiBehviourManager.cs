@@ -27,21 +27,21 @@ public class GimiBehviourManager : MonoBehaviour
     void Update()
     {
         distance = (float)Vector3.Distance(this.transform.position, HDM.position);
-//        Debug.Log("distance is : " + distance);
-        if (distance >= SocialDistance + bufferDistance )//animation distance
+        //        Debug.Log("distance is : " + distance);
+        if (distance >= SocialDistance + bufferDistance)//animation distance
         {
             Debug.Log("if animation pass");
             enableAndDisableScripts(null);
             return;
         }
-        
-        if(distance > IntimateDistance + bufferDistance && distance < SocialDistance - bufferDistance)//interval distance
+
+        if (distance > IntimateDistance + bufferDistance && distance < SocialDistance - bufferDistance)//interval distance
         {
             Debug.Log("if interval pass");
             enableAndDisableScripts(false);
             return;
         }
-        if(distance <= IntimateDistance - bufferDistance)
+        if (distance <= IntimateDistance - bufferDistance)
         {
             Debug.Log("if stalker pass");
             enableAndDisableScripts(true);//stalking distace
@@ -50,21 +50,23 @@ public class GimiBehviourManager : MonoBehaviour
         else
         {
             Debug.Log("_____In Buffer__________");
-            if(currentRunningBehavior == null) {
+            if (currentRunningBehavior == null)
+            {
                 SmoothLookAt(AnimationStart.position, transitionSpeedToStart, Time.deltaTime);
+                Debug.Log("_______looking to animation___________");
             }
-            if(currentRunningBehavior == true) { SmoothLookAt(HDM.position, transitionSpeedToStart, Time.deltaTime); }
-            
+            if (currentRunningBehavior == true) { SmoothLookAt(HDM.position, transitionSpeedToStart, Time.deltaTime); }
+
             this.GetComponent<GimiInterval>().enabled = false;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<GimiStalker>().enabled = false;
             this.GetComponent<Animator>().Play("AmitGimi animation", -1, normalizedTime: 0.0f);
             bufferBool = true;
-            
+
         }
     }
 
-    void SmoothLookAt(Vector3 newDirection, float speed,float startMovementTime)
+    void SmoothLookAt(Vector3 newDirection, float speed, float startMovementTime)
     {
         time += Time.deltaTime;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(newDirection - transform.position), Time.deltaTime * speed);
@@ -87,7 +89,7 @@ public class GimiBehviourManager : MonoBehaviour
             SmoothLookAt(AnimationStart.position, transitionSpeedToStart, Time.deltaTime);
             this.GetComponent<GimiStalker>().enabled = false;
             this.GetComponent<GimiInterval>().enabled = false;
-            
+
             //this.GetComponent<GimiLookatToAnimation>().enabled = true;
             this.GetComponent<Animator>().enabled = true;
             bufferBool = false;
@@ -98,7 +100,7 @@ public class GimiBehviourManager : MonoBehaviour
         {
             //Debug.Log("interval activate");
             this.GetComponent<GimiStalker>().enabled = false;
-            this.GetComponent<Animator>().Play ("AmitGimi animation", -1 ,normalizedTime: 0.0f);
+            this.GetComponent<Animator>().Play("AmitGimi animation", -1, normalizedTime: 0.0f);
             this.GetComponent<Animator>().enabled = false;
             //this.GetComponent<GimiLookatToAnimation>().enabled = false;
             SmoothLookAt(IntervalStart.position, transitionSpeedToStart, Time.deltaTime);
@@ -120,7 +122,7 @@ public class GimiBehviourManager : MonoBehaviour
             bufferBool = false;
             return;
         }
-        
+
 
     }
 }
