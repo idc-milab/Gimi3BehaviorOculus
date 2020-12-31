@@ -53,12 +53,14 @@ public class GimiStalker : MonoBehaviour {
             oldPos = transform.position;
             B_shouldJiggle = true;
             timmerForJiggle = 0;
-            transform.LookAt(target);
+            //transform.LookAt(target);
+            SmoothLookAt(target.position);
         }
         else {
             if(timmerForJiggle < 0.1f)//finished move jiggle time delay
             {
-                transform.LookAt(target);
+                SmoothLookAt(target.position);
+                //transform.LookAt(target);
                 this.transform.localPosition = basePosition + positionJigAmount * Mathf.Sin(positionTime) * power;
             }
             else
