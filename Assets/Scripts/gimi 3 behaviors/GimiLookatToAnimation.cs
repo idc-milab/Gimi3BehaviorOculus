@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GimiLookatToAnimation : MonoBehaviour
 {
-
-
     public Transform target;
     public Transform startPoint;
     public Transform endpoint;
@@ -24,45 +22,46 @@ public class GimiLookatToAnimation : MonoBehaviour
         track = false;
     }
 
+    private void Start()
+    {
+        track = false;
+        transform.LookAt(startPoint);
+        animator = gameObject.GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animation>();
 
-    private void OnEnable() { }
-
+    }
 
     void Update()
     {
-        /*
-        time += Time.deltaTime;
 
-        if (time >= sleepTime && time < sleepTime + trackTime)
+        if (!anim.isPlaying && track)
         {
-            SmoothLookAt(target.position, transitionSpeedToStart);
-
+            animator.Play("AmitGimi animation");
+            return;
         }
         if (track && anim.isPlaying)
         {
             return;
         }
-        /*
-        if (time >= sleepTime && time < sleepTime+trackTime)
+
+        time += Time.deltaTime;
+
+        if (time >= sleepTime && time < sleepTime + trackTime)
         {
-            SmoothLookAt(target.position,transionSpeedToTarget);
+            SmoothLookAt(target.position, transionSpeedToTarget);
         }
 
         if (time >= sleepTime + trackTime && !track)
-        { 
-            SmoothLookAt(endpoint.position,transitionSpeedToStart);
+        {
+            SmoothLookAt(endpoint.position, transitionSpeedToStart);
         }
-        
+
         //transform.LookAt(endpoint);
-        if (time >= sleepTime + trackTime+3f &&!track) { 
+        if (time >= sleepTime + trackTime + 3f && !track)
+        {
             track = true;
             animator.enabled = true;
         }
-        if (!anim.isPlaying && track)
-        {
-            animator.Play("AmitGimi animation");
-            return;
-        }*/
 
 
 
@@ -71,5 +70,25 @@ public class GimiLookatToAnimation : MonoBehaviour
     {
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(newDirection - transform.position), Time.deltaTime * speed);
     }
+    bool IsLookingAtObject(Transform looker, Vector3 targetPos, float FOVAngle)
+    {
 
+        Vector3 direction = targetPos - looker.position;
+        float ang = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float lookerAngle = looker.eulerAngles.z;
+        float checkAngle = 0f;
+
+        if (ang >= 0f)
+            checkAngle = ang - lookerAngle - 90f;
+        else if (ang < 0f)
+            checkAngle = ang - lookerAngle + 270f;
+
+        if (checkAngle < -180f)
+            checkAngle = checkAngle + 360f;
+
+        if (checkAngle <= FOVAngle * .5f && checkAngle >= -FOVAngle * .5f)
+            return true;
+        else
+            return false;
+    }
 }
