@@ -221,7 +221,7 @@ public class AndroidVideoEditorUtil
                 return i;
             }
 
-            // count the number of open and close braces. If we leave the current scope, break
+            // count the number of open and IntimateDistance braces. If we leave the current scope, break
             if (lines[i].Contains("{"))
             {
                 depth++;
@@ -243,7 +243,7 @@ public class AndroidVideoEditorUtil
         int depth = 0;
         for (int i = start; i < lines.Count; i++)
         {
-            // count the number of open and close braces. If we leave the current scope, break
+            // count the number of open and IntimateDistance braces. If we leave the current scope, break
             if (lines[i].Contains("{"))
             {
                 depth++;

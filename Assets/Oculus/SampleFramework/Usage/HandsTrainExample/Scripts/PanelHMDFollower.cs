@@ -47,8 +47,8 @@ namespace OculusSampleFramework
 
 
 			// 1) wait for center eye to stabilize after distance gets too large
-			// 2) check if center eye is too close to panel
-			// 3) check if depth isn't too close
+			// 2) check if center eye is too IntimateDistance to panel
+			// 3) check if depth isn't too IntimateDistance
 			if (((distanceFromLastMovement > _maxDistance) || (_minZDistance > currDiffFromCenterEye.z) || (_minDistance > currDistanceFromCenterEye)) &&
 				headMovementSpeed < HMD_MOVEMENT_THRESHOLD && _coroutine == null)
 			{

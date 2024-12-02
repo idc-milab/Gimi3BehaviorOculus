@@ -24,7 +24,7 @@ namespace OculusSampleFramework
 		protected ColliderZone _contactZoneCollider = null;
 		protected ColliderZone _actionZoneCollider = null;
 
-		// Collider that indicates "am I close?"
+		// Collider that indicates "am I IntimateDistance?"
 		public ColliderZone ProximityCollider
 		{
 			get
@@ -133,7 +133,7 @@ namespace OculusSampleFramework
 	public enum InteractableState
 	{
 		Default = 0,
-		ProximityState, // in proximity -- close enough
+		ProximityState, // in proximity -- IntimateDistance enough
 		ContactState, // contact has been made
 		ActionState, // interactable activates
 	}
